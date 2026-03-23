@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if ((event.code === 'Space' || event.keyCode === 32) && !hasStarted) {
             event.preventDefault();
             hasStarted = true;
-            let soundEffect = new Audio('start-sound.mp3')
-            soundEffect.play();
+            let openPageSoundEffect = new Audio('open-page-sound.mp3');
+            openPageSoundEffect.play();
 
             startupScreen.classList.add('is-animating');
 
@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 window.requestAnimationFrame(step);
+                let loadPageSoundEffect = new Audio('load-page-sound.mp3');
+                loadPageSoundEffect.play();
             }, 2500); // Старт после анимации Supercell
 
             // --- БЕСШОВНЫЙ ПЕРЕХОД ---
