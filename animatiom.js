@@ -5,6 +5,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!startupScreen) return;
 
+    function warmupStaticFiles() {
+    const files = [
+        'second-page.html',
+        'third-page.html',
+
+        'characters.css',
+        'style.css',
+        'reset.css',
+
+        'characters.js',
+        'value.js',
+        'script.js',
+        'deck.js',
+
+        'data.json',
+
+        // если на страницах есть фоновые картинки из CSS —
+        // добавь их сюда вручную
+        'img/background.png',
+        'img/second-page-bg.png',
+        'fonts/supercell-magic.ttf'
+    ];
+
+    files.forEach((url) => {
+        fetch(url, { cache: 'force-cache' }).catch(() => {});
+    });
+}
+
+async function preloadImagesFromPage(pageUrl) {
+    try {
+        const response = await fetch(pageUrl, { cache: 'force-cache' });
+        const html = await response.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const imageUrls = [...doc.querySelectorAll('img')]
+            .map(img => img.getAttribute('src'))
+            .filter(Boolean);
+
+        imageUrls.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    } catch (error) {
+        console.warn(`Не удалось предзагрузить изображения страницы ${pageUrl}`, error);
+    }
+}
+
+function warmupNextPages() {
+    warmupStaticFiles();
+    preloadImagesFromPage('second-page.html');
+    preloadImagesFromPage('third-page.html');
+}
+
+warmupNextPages();
+
     document.addEventListener('keydown', function(event) {
         if ((event.code === 'Space' || event.keyCode === 32) && !hasStarted) {
             event.preventDefault();
@@ -54,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.href = 'second-page.html'; 
                 }, 500);
 
-            }, 7500); 
+            }, 8500); 
         }
     });
 });

@@ -387,3 +387,17 @@
     pointer-events: none;
     opacity: 0.5;
 }
+
+.popover__color:disabled,
+.popover__color--disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: 0 0 0 2px rgba(23, 48, 95, 0.1);
+}
+
+.popover__color:disabled:hover,
+.popover__color--disabled:hover {
+    transform: none;
+    box-shadow: 0 0 0 2px rgba(23, 48, 95, 0.1);
+}

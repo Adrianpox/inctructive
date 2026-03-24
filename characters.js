@@ -157,6 +157,24 @@ function positionPopover(trigger, popoverContainer, popoverElement) {
     popoverContainer.style.left = `${left}px`;
 }
 
+function updatePopoverColorsState(popoverElement, characterId) {
+    const data = JSON.parse(localStorage.getItem('teamsData')) || { characters: [] };
+    const currentCharacter = data.characters.find(c => c.id === characterId);
+    const currentTeam = currentCharacter ? currentCharacter.team : null;
+
+    popoverElement.querySelectorAll('.popover__color').forEach(colorBtn => {
+        const team = Array.from(colorBtn.classList)
+            .find(cls => cls.startsWith('color-'));
+
+        const teamCount = data.characters.filter(c => c.team === team).length;
+
+        const shouldDisable = teamCount >= 7 && currentTeam !== team;
+
+        colorBtn.disabled = shouldDisable;
+        colorBtn.classList.toggle('popover__color--disabled', shouldDisable);
+    });
+}
+
 function openPopover(trigger) {
     closePopover();
 
@@ -166,18 +184,23 @@ function openPopover(trigger) {
     const popoverElement = document.createElement('div');
     popoverElement.className = 'popover';
     popoverElement.innerHTML = createPopoverContent(trigger);
+    updatePopoverColorsState(popoverElement, trigger.id);
 
     popoverElement.querySelectorAll('.popover__color').forEach(colorBtn => {
         colorBtn.addEventListener('click', () => {
             const id = trigger.id;
-            const teamval = colorBtn.classList[1];
+            const teamval = Array.from(colorBtn.classList)
+                .find(cls => cls.startsWith('color-'));
 
-            const data = getStorageData();
+            const data = JSON.parse(localStorage.getItem('teamsData')) || { characters: [] };
+            const currentCharacter = data.characters.find(c => c.id === id);
+            const currentTeam = currentCharacter ? currentCharacter.team : null;
 
             const teamCount = data.characters.filter(c => c.team === teamval).length;
-            const alreadyExists = data.characters.some(c => c.id === id);
 
-            if (!alreadyExists && teamCount >= 7) {
+            // запрещаем только если целевая команда уже заполнена
+            // и персонаж не состоит в этой же команде
+            if (teamCount >= 7 && currentTeam !== teamval) {
                 alert('В этой команде уже 7 персонажей');
                 return;
             }
@@ -219,23 +242,9 @@ function openPopover(trigger) {
 }
 
 function updateCharactersState() {
-    const data = getStorageData();
-
-    if (data.characters.length >= 7) {
-        document.querySelectorAll('.character__image').forEach(img => {
-            const exists = data.characters.some(c => c.id === img.id);
-
-            if (!exists) {
-                img.classList.add('disabled');
-            } else {
-                img.classList.remove('disabled');
-            }
-        });
-    } else {
-        document.querySelectorAll('.character__image').forEach(img => {
-            img.classList.remove('disabled');
-        });
-    }
+    document.querySelectorAll('.character__image').forEach(img => {
+        img.classList.remove('disabled');
+    });
 }
 
 characterImages.forEach((image) => {
