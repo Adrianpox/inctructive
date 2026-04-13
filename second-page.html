@@ -4,734 +4,768 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="characters.css">
     <title>Second page</title>
 </head>
 
 <body class="page__body">
-    <div class="container">
-        <div class="upper">
-            <div class="left-side__container">
-                <div class="tank__container">
-                    <div class="tank__head head-border">
-                        <h3 class="title">Танк</h3>
+    <div class="characters-viewport-fit">
+        <div class="characters-viewport-fit__inner">
+            <div class="container">
+                <div class="upper">
+                    <div class="left-side__container">
+                        <div class="tank__container">
+                            <div class="tank__head head-border">
+                                <h3 class="title">Танк</h3>
+                            </div>
+                            <div class="tank__body body-border">
+                                <ul class="character__list">
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Голем.png" alt="" class="character__image" id="golem">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">8</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Адская гончая.png" alt="" class="character__image"
+                                                id="lava-hound">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">7</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/П.Е.К.К.А..png" alt="" class="character__image"
+                                                id="pekka">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">7</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Мегарыцарь.png" alt="" class="character__image"
+                                                id="mega-knight">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">7</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Электрогигант.png" alt="" class="character__image"
+                                                id="electro-giant">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">7</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Гиганский скелет.png" alt="" class="character__image"
+                                                id="giant-skeleton">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">6</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Королевский гигант.png" alt="" class="character__image"
+                                                id="royal-giant">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">6</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Гигант.png" alt="" class="character__image" id="giant">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/tank/Элексирный голем.png" alt="" class="character__image"
+                                                id="elixir-golem">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="helper-side__body">
+                            <ul class="character__list">
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Вышибала.png" alt="" class="character__image" id="bowler">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">5</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Варвары.png" alt="" class="character__image"
+                                            id="barbarians">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">5</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Орда-миньонов.png" alt="" class="character__image"
+                                            id="minion-horde">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">5</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Мини-П.Е.К.К.А..png" alt="" class="character__image"
+                                            id="mini-pekka">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">4</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Армия скелетов.png" alt="" class="character__image"
+                                            id="skeleton-army">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">3</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Мега миньон.png" alt="" class="character__image"
+                                            id="mega-minion">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">3</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="tank__body body-border">
-                        <ul class="character__list">
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Голем.png" alt="" class="character__image" id="golem">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value">18</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Адская гончая.png" alt="" class="character__image"
-                                        id="lava-hound">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/П.Е.К.К.А..png" alt="" class="character__image" id="pekka">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Мегарыцарь.png" alt="" class="character__image" id="mega-knight">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Электрогигант.png" alt="" class="character__image"
-                                        id="electro-giant">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Гиганский скелет.png" alt="" class="character__image"
-                                        id="giant-skeleton">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Королевский гигант.png" alt="" class="character__image"
-                                        id="royal-giant">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Гигант.png" alt="" class="character__image" id="giant">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/tank/Элексирный голем.png" alt="" class="character__image"
-                                        id="elixir-golem">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="helper-side__body">
-                    <ul class="character__list">
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Вышибала.png" alt="" class="character__image" id="bowler">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Варвары.png" alt="" class="character__image" id="barbarians">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Орда-миньонов.png" alt="" class="character__image"
-                                    id="minion-horde">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Мини-П.Е.К.К.А..png" alt="" class="character__image"
-                                    id="mini-pekka">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Армия скелетов.png" alt="" class="character__image"
-                                    id="skeleton-army">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Мега миньон.png" alt="" class="character__image" id="mega-minion">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="middle__container">
-                <div class="shooter__container">
-                    <div class="shooter__head head-border">
-                        <h3 class="title">Стрелки</h3>
+                    <div class="middle__container">
+                        <div class="shooter__container">
+                            <div class="shooter__head head-border">
+                                <h3 class="title">Стрелки</h3>
+                            </div>
+                            <div class="shooter__body body-border">
+                                <ul class="character__list">
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Ведьма.png" alt="" class="character__image"
+                                                id="witch">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Палач.png" alt="" class="character__image"
+                                                id="executioner">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Колдун.png" alt="" class="character__image"
+                                                id="wizard">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Магический лучник.png" alt="" class="character__image"
+                                                id="magic-archer">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Громовержец.png" alt="" class="character__image"
+                                                id="electro-wizard">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Дракончик.png" alt="" class="character__image"
+                                                id="baby-dragon">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Охотник.png" alt="" class="character__image"
+                                                id="hunter">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Мушкетёр.png" alt="" class="character__image"
+                                                id="musketeer">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Принцесса.png" alt="" class="character__image"
+                                                id="princess">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Ледяной колдун.png" alt="" class="character__image"
+                                                id="ice-wizard">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Гоблин с дротиками.png" alt=""
+                                                class="character__image" id="dart-goblin">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Огненая лучница.png" alt="" class="character__image"
+                                                id="firecracker">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/shooter/Лучницы.png" alt="" class="character__image"
+                                                id="archers">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="spell__container">
+                            <div class="spell__head head-border">
+                                <h3 class="title">Заклинания</h3>
+                            </div>
+                            <div class="spell__body body-border">
+                                <ul class="character__list">
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Молния.png" alt="" class="character__image"
+                                                id="lightning">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">6</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Ракета.png" alt="" class="character__image"
+                                                id="rocket">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">6</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Кладбище.png" alt="" class="character__image"
+                                                id="graveyard">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Яд.png" alt="" class="character__image" id="poison">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Огненный шар.png" alt="" class="character__image"
+                                                id="fireball">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Торнадо.png" alt="" class="character__image"
+                                                id="tornado">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Гоблинская бочка.png" alt="" class="character__image"
+                                                id="goblin-barrel">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Стрелы.png" alt="" class="character__image"
+                                                id="arrows">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">3</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Бревно.png" alt="" class="character__image" id="log">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Варварская бочка.png" alt="" class="character__image"
+                                                id="barbarian-barrel">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Ярость.png" alt="" class="character__image" id="rage">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Разряд.png" alt="" class="character__image" id="zap">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/spells/Гиганский снежок.png" alt="" class="character__image"
+                                                id="giant-snowball">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="help-middle">
+                            <div class="helper-head head-border">
+                                <h3 class="title">Поддержка</h3>
+                            </div>
+                        </div>
                     </div>
-                    <div class="shooter__body body-border">
+                    <div class="right-side__container">
+                        <div class="light-tank__container">
+                            <div class="light-tank__head head-border">
+                                <h3 class="title">Лёгкий танк</h3>
+                            </div>
+                            <div class="light-tank__body body-border">
+                                <ul class="character__list">
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Элитные варвары.png" alt=""
+                                                class="character__image" id="elite-barbarians">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">6</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Всадница на баране.png" alt=""
+                                                class="character__image" id="ram-rider">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Принц.png" alt="" class="character__image"
+                                                id="prince">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Королевские кабаны.png" alt=""
+                                                class="character__image" id="royal-hogs">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Шар.png" alt="" class="character__image"
+                                                id="balloon">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">5</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Тёмный принц.png" alt="" class="character__image"
+                                                id="dark-prince">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Боевой таран.png" alt="" class="character__image"
+                                                id="battle-ram">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="character__item">
+                                        <div class="character__info">
+                                            <img src="img/light tank/Всадник на кабане.png" alt=""
+                                                class="character__image" id="hog-rider">
+                                            <div class="coin">
+                                                <img src="img/coin.png" alt="" class="coin__image">
+                                                <span class="coin__value">4</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="helper-side__body">
+                            <ul class="character__list">
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Ночная ведьма.png" alt="" class="character__image"
+                                            id="night-witch">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">4</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Дровосек.png" alt="" class="character__image"
+                                            id="lumberjack">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">4</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Валькирия.png" alt="" class="character__image"
+                                            id="valkyrie">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">4</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Стражи.png" alt="" class="character__image" id="guards">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">3</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Рыцарь.png" alt="" class="character__image" id="knight">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">3</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="character__item">
+                                    <div class="character__info">
+                                        <img src="img/support/Банда гоблинов.png" alt="" class="character__image"
+                                            id="goblin-gang">
+                                        <div class="coin">
+                                            <img src="img/coin.png" alt="" class="coin__image">
+                                            <span class="coin__value">3</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lower">
+                    <div class="helper-middle__body">
                         <ul class="character__list">
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Ведьма.png" alt="" class="character__image" id="witch">
+                                    <img src="img/support/Бандитка.png" alt="" class="character__image" id="bandit">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">3</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Палач.png" alt="" class="character__image" id="executioner">
+                                    <img src="img/support/Шахтёр.png" alt="" class="character__image" id="miner">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">3</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Колдун.png" alt="" class="character__image" id="wizard">
+                                    <img src="img/support/Королевский призрак.png" alt="" class="character__image"
+                                        id="royal-ghost">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">3</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Магический лучник.png" alt="" class="character__image"
-                                        id="magic-archer">
+                                    <img src="img/support/Гоблины.png" alt="" class="character__image" id="goblins">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">2</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Громовержец.png" alt="" class="character__image"
-                                        id="electro-wizard">
+                                    <img src="img/support/Гоблины-копейщики.png" alt="" class="character__image"
+                                        id="spear-goblins">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">2</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Дракончик.png" alt="" class="character__image"
-                                        id="baby-dragon">
+                                    <img src="img/support/Подрывник.png" alt="" class="character__image" id="bomber">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">2</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Охотник.png" alt="" class="character__image" id="hunter">
+                                    <img src="img/support/Летучие мыши.png" alt="" class="character__image" id="bats">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">2</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Мушкетёр.png" alt="" class="character__image" id="musketeer">
+                                    <img src="img/support/Электрический дух.png" alt="" class="character__image"
+                                        id="electro-spirit">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">1</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Принцесса.png" alt="" class="character__image" id="princess">
+                                    <img src="img/support/Скелеты.png" alt="" class="character__image" id="skeletons">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">1</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Ледяной колдун.png" alt="" class="character__image"
-                                        id="ice-wizard">
+                                    <img src="img/support/Огненый дух.png" alt="" class="character__image"
+                                        id="fire-spirits">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">1</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Гоблин с дротиками.png" alt="" class="character__image"
-                                        id="dart-goblin">
+                                    <img src="img/support/Ледяной дух.png" alt="" class="character__image"
+                                        id="ice-spirits">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">1</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Огненая лучница.png" alt="" class="character__image"
-                                        id="firecracker">
+                                    <img src="img/support/Миньоны.png" alt="" class="character__image" id="minions">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">3</span>
                                     </div>
                                 </div>
                             </li>
                             <li class="character__item">
                                 <div class="character__info">
-                                    <img src="img/shooter/Лучницы.png" alt="" class="character__image" id="archers">
+                                    <img src="img/support/Стенобои.png" alt="" class="character__image"
+                                        id="wall-breakers">
                                     <div class="coin">
                                         <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
+                                        <span class="coin__value">2</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="character__item">
+                                <div class="character__info">
+                                    <img src="img/support/Ледяной голем.png" alt="" class="character__image"
+                                        id="ice-golem">
+                                    <div class="coin">
+                                        <img src="img/coin.png" alt="" class="coin__image">
+                                        <span class="coin__value">2</span>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="spell__container">
-                    <div class="spell__head head-border">
-                        <h3 class="title">Заклинания</h3>
-                    </div>
-                    <div class="spell__body body-border">
-                        <ul class="character__list">
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Молния.png" alt="" class="character__image" id="lightning">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Ракета.png" alt="" class="character__image" id="rocket">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Кладбище.png" alt="" class="character__image" id="graveyard">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Яд.png" alt="" class="character__image" id="poison">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Огненный шар.png" alt="" class="character__image"
-                                        id="fireball">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Торнадо.png" alt="" class="character__image" id="tornado">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Гоблинская бочка.png" alt="" class="character__image"
-                                        id="goblin-barrel">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Стрелы.png" alt="" class="character__image" id="arrows">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Бревно.png" alt="" class="character__image" id="log">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Варварская бочка.png" alt="" class="character__image"
-                                        id="barbarian-barrel">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Ярость.png" alt="" class="character__image" id="rage">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Разряд.png" alt="" class="character__image" id="zap">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/spells/Гиганский снежок.png" alt="" class="character__image"
-                                        id="giant-snowball">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="help-middle">
-                    <div class="helper-head head-border">
-                        <h3 class="title">Поддержка</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="right-side__container">
-                <div class="light-tank__container">
-                    <div class="light-tank__head head-border">
-                        <h3 class="title">Лёгкий танк</h3>
-                    </div>
-                    <div class="light-tank__body body-border">
-                        <ul class="character__list">
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Элитные варвары.png" alt="" class="character__image"
-                                        id="elite-barbarians">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Всадница на баране.png" alt="" class="character__image"
-                                        id="ram-rider">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Принц.png" alt="" class="character__image" id="prince">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Королевские кабаны.png" alt="" class="character__image"
-                                        id="royal-hogs">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Шар.png" alt="" class="character__image" id="balloon">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Тёмный принц.png" alt="" class="character__image"
-                                        id="dark-prince">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Боевой таран.png" alt="" class="character__image"
-                                        id="battle-ram">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="character__item">
-                                <div class="character__info">
-                                    <img src="img/light tank/Всадник на кабане.png" alt="" class="character__image"
-                                        id="hog-rider">
-                                    <div class="coin">
-                                        <img src="img/coin.png" alt="" class="coin__image">
-                                        <span class="coin__value"></span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="helper-side__body">
-                    <ul class="character__list">
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Ночная ведьма.png" alt="" class="character__image"
-                                    id="night-witch">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Дровосек.png" alt="" class="character__image" id="lumberjack">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Валькирия.png" alt="" class="character__image" id="valkyrie">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Стражи.png" alt="" class="character__image" id="guards">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Рыцарь.png" alt="" class="character__image" id="knight">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="character__item">
-                            <div class="character__info">
-                                <img src="img/support/Банда гоблинов.png" alt="" class="character__image"
-                                    id="goblin-gang">
-                                <div class="coin">
-                                    <img src="img/coin.png" alt="" class="coin__image">
-                                    <span class="coin__value"></span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="lower">
-            <div class="helper-middle__body">
-                <ul class="character__list">
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Бандитка.png" alt="" class="character__image" id="bandit">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Шахтёр.png" alt="" class="character__image" id="miner">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Королевский призрак.png" alt="" class="character__image"
-                                id="royal-ghost">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Гоблины.png" alt="" class="character__image" id="goblins">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Гоблины-копейщики.png" alt="" class="character__image"
-                                id="spear-goblins">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Подрывник.png" alt="" class="character__image" id="bomber">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Летучие мыши.png" alt="" class="character__image" id="bats">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Электрический дух.png" alt="" class="character__image"
-                                id="electro-spirit">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Скелеты.png" alt="" class="character__image" id="skeletons">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Огненый дух.png" alt="" class="character__image" id="fire-spirits">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Ледяной дух.png" alt="" class="character__image" id="ice-spirits">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Миньоны.png" alt="" class="character__image" id="minions">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Стенобои.png" alt="" class="character__image" id="wall-breakers">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="character__item">
-                        <div class="character__info">
-                            <img src="img/support/Ледяной голем.png" alt="" class="character__image" id="ice-golem">
-                            <div class="coin">
-                                <img src="img/coin.png" alt="" class="coin__image">
-                                <span class="coin__value"></span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
     <div class="next-page">
-        <a href="third-page.html">
-            <button class="btn__link"></button>
-        </a>
+        <a class="btn__link" href="third-page.html" aria-label="К колодам"></a>
+    </div>
+    <!-- Находим инпут в конце файла и добавляем checked -->
+    <div class="hide-value">
+        <input class="hidden-btn" type="checkbox" role="switch" checked>
+        <input id="scale-input" class="scale-input" type="text" placeholder="" autocomplete="off">
+        <button class="scale-btn"></button>
     </div>
     <script src="characters.js"></script>
-    <script src="value.js"></script>
+    <script src="hide.js"></script>
+    <script src="scale.js"></script>
 </body>
 
 </html>

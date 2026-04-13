@@ -9,9 +9,21 @@
 </head>
 
 <body class="second-page__body">
+    <div class="decks-viewport-fit">
+    <div class="decks-viewport-fit__inner">
     <div class="secret__section">
         <div class="secret-card__container">
             <ul class="secret-card__list">
+                <li class="secret-card__item">
+                    <div class="card-inner">
+                        <div class="secret-card">
+                            <img src="img/secret-card.png" alt="" class="secret-card__image">
+                        </div>
+                        <div class="open-card">
+                            <img src="img/secret/куст.png" alt="" class="secret-card__image">
+                        </div>
+                    </div>
+                </li>
                 <li class="secret-card__item">
                     <div class="card-inner">
                         <div class="secret-card">
@@ -89,6 +101,16 @@
                         </div>
                         <div class="open-card">
                             <img src="img/secret/Заморозка.png" alt="" class="secret-card__image">
+                        </div>
+                    </div>
+                </li>
+                <li class="secret-card__item">
+                    <div class="card-inner">
+                        <div class="secret-card">
+                            <img src="img/secret-card.png" alt="" class="secret-card__image">
+                        </div>
+                        <div class="open-card">
+                            <img src="img/secret/Королевские рекрутеры.png" alt="" class="secret-card__image">
                         </div>
                     </div>
                 </li>
@@ -261,8 +283,8 @@
                             <li class="card__slot">
                                 <div class="slot__frame"></div>
                             </li>
-                            <li class="card__slot">
-                                <div class="slot__frame last__slot"></div>
+                            <li class="card__slot last__slot">
+                                <div class="slot__frame"></div>
                             </li>
                         </ul>
                     </div>
@@ -369,19 +391,87 @@
                         </ul>
                     </div>
                 </div>
+                <!-- NINETH DECK -->
+                <div class="deck" data-team="color-nineth">
+                    <div class="deck__header">
+                        <h3 class="deck__title nineth-deck">Боевая колода</h3>
+                    </div>
+                    <div class="deck__body">
+                        <ul class="card__list">
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot last__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- TENTH DECK -->
+                <div class="deck" data-team="color-tenth">
+                    <div class="deck__header">
+                        <h3 class="deck__title tenth-deck">Боевая колода</h3>
+                    </div>
+                    <div class="deck__body">
+                        <ul class="card__list">
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                            <li class="card__slot last__slot">
+                                <div class="slot__frame"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <!-- DECK END -->
             </div>
         </div>
     </div>
+    </div>
+    </div>
 
     <div class="previous-page">
-        <a href="second-page.html">
-            <button class="btn__link"></button>
-        </a>
+        <a class="btn__link" href="second-page.html" aria-label="Назад к коллекции карт"></a>
     </div>
     <div class="buttons">
         <button class="undo-secret-card-btn" type="button">Возврат</button>
-        <button class="clear-decks-btn">Сброс</button>
+        <button class="clear-decks-btn" type="button" aria-label="Сбросить распределение карт по колодам">Сброс колод</button>
     </div>
 
     <script src="script.js"></script>

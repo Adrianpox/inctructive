@@ -38,25 +38,25 @@ function renderDecks() {
 }
 
 function clearDecks() {
-    // 1. очищаем localStorage
+    if (typeof window.resetThirdPageDecksAndSecretCards === 'function') {
+        window.resetThirdPageDecksAndSecretCards();
+        return;
+    }
+
     localStorage.removeItem('teamsData');
 
-    // 2. очищаем слоты
     document.querySelectorAll('.slot__frame').forEach(slot => {
         slot.innerHTML = '';
     });
 
-    // (опционально) если есть активные классы
     document.querySelectorAll('.deck').forEach(deck => {
-        deck.classList.remove('active-deck');
+        deck.classList.remove('active-deck', 'deck-disabled');
     });
 }
 
 document.addEventListener('DOMContentLoaded', renderDecks);
 
-document.querySelector('.clear-decks-btn').addEventListener('click', () => {
-
+document.querySelector('.clear-decks-btn')?.addEventListener('click', () => {
     if (!confirm('Очистить все колоды?')) return;
-
     clearDecks();
 });

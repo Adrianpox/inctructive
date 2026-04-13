@@ -114,14 +114,61 @@
 
 .second-page__body {
     background-image: url(img/second-page-bg.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
     max-width: 100vw;
     max-height: 100vh;
     width: 100%;
     height: 100%;
     margin: 0;
+    min-height: 100dvh;
+    overflow: hidden;
+}
+
+/* Страница с 8 колодами (third-page): вписываем секрет + колоды в экран без прокрутки */
+.decks-viewport-fit {
+    width: 100%;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+/* Расчётный макет: ~350 секрет + 75 отступ + 2 ряда колод (319+53+319) ≈ 1116px по высоте, ~1920px по ширине */
+/*.decks-viewport-fit__inner {
+    width: 100%;
+    max-width: 1920px;
+    flex-shrink: 0;
+    transform-origin: top center;
+    --decks-fit: min(1, 100vw / 1920px, 100dvh / 1140px, 100vh / 1140px);
+}
+
+@supports (zoom: 1) {
+    .decks-viewport-fit__inner {
+        zoom: var(--decks-fit);
+    }
+}
+
+@supports not (zoom: 1) {
+    .decks-viewport-fit__inner {
+        transform: scale(var(--decks-fit));
+    }
+}*/
+
+/* Пока карта «выплыла» — весь контент страницы над стрелками и прочим UI */
+.decks-viewport-fit:has(.secret-card__container.has-active-card) {
+    position: relative;
+    z-index: 6500;
 }
 
 .secret__section {
+    position: relative;
+    z-index: 10;
     width: 100%;
     height: 350px;
     padding-top: 50px;
@@ -155,9 +202,10 @@
     position: fixed !important;
     margin: 0 !important;
     top: 50% !important;
-    left: 830px !important;
-    transform: translate(50%, 50%) scale(3) rotate(0deg) !important;
-    z-index: 100 !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(3) rotate(0deg) !important;
+    transform-origin: center center !important;
+    z-index: 9000 !important;
 }
 
 
@@ -220,241 +268,392 @@
 }
 /* Карта готовится к "магическому" открытию */
 .secret-card__item.is-revealing {
-    animation: cardRevealPop 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-    z-index: 120 !important;
+    animation: cardRevealPop 4.8s cubic-bezier(0.2, 0.65, 0.15, 1);
+    z-index: 9100 !important;
 }
 
 .secret-card__item.is-revealing .card-inner {
-    animation: cardRevealFlip 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    position: relative;
+    z-index: 2;
+    animation: cardRevealFlip 4.8s linear forwards;
 }
 
-.secret-card__item.is-revealing::before {
-    content: "";
-    position: absolute;
-    inset: -18px;
-    border-radius: 20px;
-    background:
-        radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 28%, rgba(255,255,255,0) 70%);
-    filter: blur(10px);
-    opacity: 0;
-    pointer-events: none;
-    animation: revealGlow 0.95s ease-out forwards;
-    z-index: 0;
+/* Свечение по контуру арта (drop-shadow у img), не по прямоугольнику блока */
+.secret-card__item.is-revealing .secret-card,
+.secret-card__item.is-revealing .open-card {
+    overflow: visible;
 }
 
-.secret-card__item.is-revealing .secret-card__image {
-    animation: revealShine 0.95s ease-out;
+.secret-card__item.is-revealing .secret-card .secret-card__image {
+    animation: revealShine 4.8s cubic-bezier(0.25, 0.1, 0.2, 1);
+}
+
+/* Лицо карты: сначала «вспышка» — не разобрать рисунок; к каждому полному обороту ближе к норме */
+.secret-card__item.is-revealing .open-card .secret-card__image {
+    animation: revealOpenFaceUnveil 4.8s linear forwards;
 }
 
 
 
 @keyframes cardRevealPop {
     0% {
-        transform: translate(50%, 50%) scale(3) rotate(0deg);
+        transform: translate(-50%, -50%) scale(3) rotate(0deg);
         filter: brightness(1);
     }
-    18% {
-        transform: translate(50%, 50%) scale(3.22) rotate(0deg);
-        filter: brightness(1.15);
+    12% {
+        transform: translate(-50%, -50%) scale(3.14) rotate(0deg);
+        filter: brightness(1.12);
     }
-    42% {
-        transform: translate(50%, 50%) scale(3.1) rotate(0deg);
-        filter: brightness(1.35);
+    35% {
+        transform: translate(-50%, -50%) scale(3.26) rotate(0deg);
+        filter: brightness(1.28);
     }
-    70% {
-        transform: translate(50%, 50%) scale(3.28) rotate(0deg);
-        filter: brightness(1.08);
+    62% {
+        transform: translate(-50%, -50%) scale(3.18) rotate(0deg);
+        filter: brightness(1.12);
     }
     100% {
-        transform: translate(50%, 50%) scale(3) rotate(0deg);
+        transform: translate(-50%, -50%) scale(3) rotate(0deg);
         filter: brightness(1);
     }
 }
 
+/*
+ * 0–38%: угол ∝ t² — разгон.
+ * 38–58%: последние 180° по cubic ease-out (мягкий вход в финал, без рывка после разгона).
+ */
 @keyframes cardRevealFlip {
+    0% { transform: rotateY(0deg) scale(1); }
+    2% { transform: rotateY(7.98deg) scale(1); }
+    4% { transform: rotateY(31.91deg) scale(1); }
+    6% { transform: rotateY(71.8deg) scale(1); }
+    8% { transform: rotateY(127.65deg) scale(1); }
+    10% { transform: rotateY(199.45deg) scale(1); }
+    12% { transform: rotateY(287.23deg) scale(1); }
+    14% { transform: rotateY(391.03deg) scale(1); }
+    16% { transform: rotateY(510.53deg) scale(1); }
+    18% { transform: rotateY(646.76deg) scale(1); }
+    20% { transform: rotateY(798.34deg) scale(1); }
+    22% { transform: rotateY(965.33deg) scale(1); }
+    24% { transform: rotateY(1147.92deg) scale(1); }
+    26% { transform: rotateY(1346.26deg) scale(1); }
+    28% { transform: rotateY(1560.11deg) scale(1); }
+    30% { transform: rotateY(1795.01deg) scale(1); }
+    32% { transform: rotateY(2043.21deg) scale(1); }
+    34% { transform: rotateY(2305.82deg) scale(1); }
+    36% { transform: rotateY(2586.7deg) scale(1); }
+    38% { transform: rotateY(2880deg) scale(1); }
+    40% { transform: rotateY(2928.78deg) scale(1); }
+    42% { transform: rotateY(2967.84deg) scale(1); }
+    44% { transform: rotateY(2998.26deg) scale(1); }
+    46% { transform: rotateY(3021.12deg) scale(1); }
+    48% { transform: rotateY(3037.5deg) scale(1); }
+    50% { transform: rotateY(3048.48deg) scale(1); }
+    52% { transform: rotateY(3055.14deg) scale(1); }
+    54% { transform: rotateY(3058.56deg) scale(1); }
+    56% { transform: rotateY(3059.82deg) scale(1); }
+    58% { transform: rotateY(3060deg) scale(1); }
+    100% { transform: rotateY(3060deg) scale(1); }
+}
+
+/*
+ * Проценты ~ совпадают с полными оборотами при разгоне (угол ∝ t² до 2880°):
+ * 360°≈13%, 720°≈19%, 1080°≈23%, 1440°≈27%, 1800°≈30%, 2160°≈33%, 2520°≈36%, 2880°≈38%.
+ */
+@keyframes revealOpenFaceUnveil {
     0% {
-        transform: rotateY(0deg) rotateZ(0deg);
+        filter:
+            brightness(7.8) contrast(0.68) saturate(0.18) blur(3.2px)
+            drop-shadow(0 0 14px rgba(255, 255, 255, 0.92))
+            drop-shadow(0 0 28px rgba(255, 255, 255, 0.45));
     }
-    20% {
-        transform: rotateY(0deg) rotateZ(-1deg);
+    13% {
+        filter:
+            brightness(5.35) contrast(0.8) saturate(0.38) blur(1.8px)
+            drop-shadow(0 0 12px rgba(240, 245, 255, 0.55))
+            drop-shadow(0 0 22px rgba(255, 255, 255, 0.28));
+    }
+    19% {
+        filter:
+            brightness(3.35) contrast(0.88) saturate(0.58) blur(0.75px)
+            drop-shadow(0 0 10px rgba(200, 215, 255, 0.4));
+    }
+    23% {
+        filter:
+            brightness(2.75) contrast(0.91) saturate(0.68) blur(0.35px)
+            drop-shadow(0 0 9px rgba(180, 200, 255, 0.38));
+    }
+    27% {
+        filter:
+            brightness(2.25) contrast(0.93) saturate(0.76) blur(0px)
+            drop-shadow(0 0 8px rgba(160, 190, 255, 0.42));
+    }
+    30% {
+        filter:
+            brightness(1.9) contrast(0.95) saturate(0.82)
+            drop-shadow(0 0 8px rgba(150, 180, 255, 0.45));
+    }
+    33% {
+        filter:
+            brightness(1.55) contrast(0.96) saturate(0.88)
+            drop-shadow(0 0 9px rgba(140, 170, 255, 0.5));
+    }
+    36% {
+        filter:
+            brightness(1.28) contrast(0.97) saturate(0.93)
+            drop-shadow(0 0 10px rgba(140, 170, 255, 0.55));
+    }
+    38% {
+        filter:
+            brightness(1.1) contrast(0.98) saturate(0.97)
+            drop-shadow(0 0 11px rgba(133, 155, 234, 0.58));
+    }
+    40% {
+        filter:
+            brightness(1.22) saturate(1.08) contrast(0.99)
+            drop-shadow(0 0 11px rgba(138, 165, 255, 0.68))
+            drop-shadow(0 0 22px rgba(200, 220, 255, 0.42));
+    }
+    44% {
+        filter:
+            brightness(1.48) saturate(1.32)
+            drop-shadow(0 0 13px rgba(140, 170, 255, 0.88))
+            drop-shadow(0 0 28px rgba(200, 220, 255, 0.52));
     }
     48% {
-        transform: rotateY(90deg) rotateZ(0deg) scale(1.03);
+        filter:
+            brightness(1.32) saturate(1.18)
+            drop-shadow(0 0 11px rgba(133, 155, 234, 0.75))
+            drop-shadow(0 0 24px rgba(190, 210, 255, 0.4));
     }
-    60% {
-        transform: rotateY(180deg) rotateZ(1deg) scale(1.08);
+    52% {
+        filter:
+            brightness(1.14) saturate(1.05)
+            drop-shadow(0 0 9px rgba(133, 155, 234, 0.58))
+            drop-shadow(0 0 20px rgba(200, 218, 255, 0.3));
     }
-    78% {
-        transform: rotateY(180deg) rotateZ(-1deg) scale(0.98);
+    56% {
+        filter:
+            brightness(1.03) saturate(1.02) contrast(1)
+            drop-shadow(0 0 6px rgba(133, 155, 234, 0.35))
+            drop-shadow(0 0 14px rgba(180, 200, 255, 0.18));
+    }
+    58% {
+        filter:
+            brightness(1) saturate(1) contrast(1)
+            drop-shadow(0 0 4px rgba(133, 155, 234, 0.2))
+            drop-shadow(0 0 10px rgba(180, 200, 255, 0.12));
+    }
+    72% {
+        filter:
+            brightness(1) saturate(1) contrast(1)
+            drop-shadow(0 0 4px rgba(133, 155, 234, 0.18))
+            drop-shadow(0 0 10px rgba(180, 200, 255, 0.1));
     }
     100% {
-        transform: rotateY(180deg) rotateZ(0deg) scale(1);
-    }
-}
-
-@keyframes revealGlow {
-    0% {
-        opacity: 0;
-        transform: scale(0.85);
-    }
-    20% {
-        opacity: 0.95;
-        transform: scale(1.18);
-    }
-    55% {
-        opacity: 0.75;
-        transform: scale(1.28);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(1.45);
+        filter:
+            brightness(1) saturate(1) contrast(1)
+            drop-shadow(0 0 4px rgba(133, 155, 234, 0.2))
+            drop-shadow(0 0 10px rgba(180, 200, 255, 0.12));
     }
 }
 
 @keyframes revealShine {
     0% {
-        filter: brightness(1) saturate(1);
+        filter:
+            brightness(1) saturate(1)
+            drop-shadow(0 0 2px rgba(133, 155, 234, 0.25));
     }
-    35% {
-        filter: brightness(1.35) saturate(1.25);
+    12% {
+        filter:
+            brightness(1.5) saturate(1.35)
+            drop-shadow(0 0 10px rgba(140, 170, 255, 0.8))
+            drop-shadow(0 0 22px rgba(200, 220, 255, 0.55))
+            drop-shadow(0 0 36px rgba(255, 255, 255, 0.25));
     }
-    65% {
-        filter: brightness(1.15) saturate(1.4);
+    28% {
+        filter:
+            brightness(1.65) saturate(1.5)
+            drop-shadow(0 0 14px rgba(160, 190, 255, 0.95))
+            drop-shadow(0 0 32px rgba(220, 232, 255, 0.6))
+            drop-shadow(0 0 48px rgba(255, 255, 255, 0.3));
+    }
+    50% {
+        filter:
+            brightness(1.35) saturate(1.4)
+            drop-shadow(0 0 12px rgba(133, 155, 234, 0.75))
+            drop-shadow(0 0 26px rgba(190, 210, 255, 0.45));
+    }
+    72% {
+        filter:
+            brightness(1.18) saturate(1.2)
+            drop-shadow(0 0 8px rgba(133, 155, 234, 0.45))
+            drop-shadow(0 0 18px rgba(200, 218, 255, 0.28));
     }
     100% {
-        filter: brightness(1) saturate(1);
+        filter:
+            brightness(1) saturate(1)
+            drop-shadow(0 0 4px rgba(133, 155, 234, 0.2))
+            drop-shadow(0 0 10px rgba(180, 200, 255, 0.12));
     }
 }
 
-/* 1-я карта */
+/* 1-я карта (крайняя левая) */
 .secret-card__list .secret-card__item:nth-child(1) {
-    margin-left: -460px;
-    top: 85px;
-    transform: translateX(-50%) rotate(-15deg);
+    margin-left: -540px;
+    top: 115px;
+    transform: translateX(-50%) rotate(-20deg);
 }
 
 /* 2-я карта */
 .secret-card__list .secret-card__item:nth-child(2) {
-    margin-left: -325px;
-    top: 55px;
-    transform: translateX(-50%) rotate(-10deg);
+    margin-left: -420px;
+    top: 85px;
+    transform: translateX(-50%) rotate(-15deg);
 }
 
 /* 3-я карта */
 .secret-card__list .secret-card__item:nth-child(3) {
-    margin-left: -195px;
-    top: 38px;
-    transform: translateX(-50%) rotate(-5deg);
+    margin-left: -300px;
+    top: 62px;
+    transform: translateX(-50%) rotate(-10deg);
 }
 
 /* 4-я карта */
 .secret-card__list .secret-card__item:nth-child(4) {
-    margin-left: -65px;
-    top: 30px;
-    transform: translateX(-50%) rotate(-1deg);
+    margin-left: -180px;
+    top: 45px;
+    transform: translateX(-50%) rotate(-6deg);
 }
 
-/* 5-я карта */
+/* 5-я карта (центр-лево) */
 .secret-card__list .secret-card__item:nth-child(5) {
-    margin-left: 65px;
-    top: 30px;
-    transform: translateX(-50%) rotate(1deg);
+    margin-left: -60px;
+    top: 35px;
+    transform: translateX(-50%) rotate(-2deg);
 }
 
-/* 6-я карта */
+/* 6-я карта (центр-право) */
 .secret-card__list .secret-card__item:nth-child(6) {
-    margin-left: 195px;
-    top: 38px;
-    transform: translateX(-50%) rotate(5deg);
+    margin-left: 60px;
+    top: 35px;
+    transform: translateX(-50%) rotate(2deg);
 }
 
 /* 7-я карта */
 .secret-card__list .secret-card__item:nth-child(7) {
-    margin-left: 325px;
-    top: 55px;
-    transform: translateX(-50%) rotate(10deg);
+    margin-left: 180px;
+    top: 45px;
+    transform: translateX(-50%) rotate(6deg);
 }
 
 /* 8-я карта */
 .secret-card__list .secret-card__item:nth-child(8) {
-    margin-left: 460px;
+    margin-left: 300px;
+    top: 62px;
+    transform: translateX(-50%) rotate(10deg);
+}
+
+/* 9-я карта */
+.secret-card__list .secret-card__item:nth-child(9) {
+    margin-left: 420px;
     top: 85px;
     transform: translateX(-50%) rotate(15deg);
 }
 
+/* 10-я карта (крайняя правая) */
+.secret-card__list .secret-card__item:nth-child(10) {
+    margin-left: 540px;
+    top: 115px;
+    transform: translateX(-50%) rotate(20deg);
+}
+
 .deck__section {
+    position: relative;
+    z-index: 1;
     margin-top: 75px;
 }
 
+/* 1. Сетка для 10 колод (2 строки по 5 штук) */
 .deck-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    row-gap: 53px;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 колонок */
+    gap: 20px;
+    row-gap: 50px;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+/* 2. Сама колода */
 .deck {
-    width: 450px;
-    height: 319px;
+    width: 360px;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    align-items: center; /* Центрирует шапку относительно тела */
 }
 
+/* 3. Шапка колоды и Центрирование текста */
 .deck__header {
     background-color: #002870;
-    width: 290px;
-    height: 42px;
+    width: 284px;
+    height: 40px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    margin: 0 auto;
+    display: flex;            /* Используем flex для центровки текста */
+    align-items: center;      /* Центрирование по вертикали */
+    justify-content: center;   /* Центрирование по горизонтали */
     z-index: 2;
 }
 
 .deck__title {
-    text-align: center;
-    margin-bottom: 0;
-    margin-top: 12px;
-    font-size: 24px;
+    margin: 0;                /* Убираем лишние отступы */
+    font-size: 20px;
     text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
 }
 
+/* 4. Тело колоды */
 .deck__body {
-    width: 450px;
-    height: 277px;
+    width: 360px;
+    height: 220px;
     background-color: #002870;
-    position: relative;
-    z-index: 1;
-    border-radius: 5px;
-}
-
-.card__list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 9px 11px 9px 11px;
-    row-gap: 19px;
-    column-gap: 7px;
-    justify-content: space-between;
-}
-
-.slot__frame {
-    width: 99px;
-    height: 117px;
-    background-color: #011a5d;
     border-radius: 10px;
+    padding: 12px;           /* Внутренние отступы для ячеек */
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+/* 5. Сетка для 8 карт внутри колоды (4 в ряд) */
+.card__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
+    grid-template-rows: repeat(2, 1fr);    /* 2 строки */
+    gap: 8px;                              /* Расстояние между ячейками */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+/* 6. Размер ячейки карты */
+.slot__frame {
+    width: 100%;
+    height: 90px;
+    background-color: #011a5d;
+    border-radius: 8px;
 }
 
 .first-deck {
-    color: #fff;
+    color: #F6C627;
     text-shadow:
-        2px 2px 0 #000,
-        -2px -2px 0 #000,
-        2px -2px 0 #000,
-        -2px 2px 0 #000,
-        2px 2px 0 #000;
+        2px 2px 0 #6B6B6B,
+        -2px -2px 0 #6B6B6B,
+        2px -2px 0 #6B6B6B,
+        -2px 2px 0 #6B6B6B,
+        2px 2px 0 #6B6B6B;
 }
 
 .second-deck {
@@ -468,13 +667,13 @@
 }
 
 .third-deck {
-    color: #F6C627;
+    color: #fff;
     text-shadow:
-        2px 2px 0 #6B6B6B,
-        -2px -2px 0 #6B6B6B,
-        2px -2px 0 #6B6B6B,
-        -2px 2px 0 #6B6B6B,
-        2px 2px 0 #6B6B6B;
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
 }
 
 .fourth-deck {
@@ -488,18 +687,18 @@
 }
 
 .fifth-deck {
-    color: #000;
+    color: #ae00ff;
     text-shadow:
-        2px 2px 0 #D4D4D4,
-        -2px -2px 0 #D4D4D4,
-        2px -2px 0 #D4D4D4,
-        -2px 2px 0 #D4D4D4,
-        2px 2px 0 #D4D4D4;
+        2px 2px 0 #fff,
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px 2px 0 #fff;
 }
 
 
 .sixth-deck {
-    color: #22C01D;
+    color: #0000FF;
     text-shadow:
         2px 2px 0 #fff,
         -2px -2px 0 #fff,
@@ -509,7 +708,7 @@
 }
 
 .seventh-deck {
-    color: #FF00EE;
+    color: #22C01D;
     text-shadow:
         2px 2px 0 #fff,
         -2px -2px 0 #fff,
@@ -519,6 +718,16 @@
 }
 
 .eighth-deck {
+    color: #FF00EE;
+    text-shadow:
+        2px 2px 0 #fff,
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px 2px 0 #fff;
+}
+
+.nineth-deck{
     color: #D77D00;
     text-shadow:
         2px 2px 0 #fff,
@@ -526,6 +735,16 @@
         2px -2px 0 #fff,
         -2px 2px 0 #fff,
         2px 2px 0 #fff;
+}
+
+.tenth-deck{
+    color: #000;
+    text-shadow:
+        2px 2px 0 #D4D4D4,
+        -2px -2px 0 #D4D4D4,
+        2px -2px 0 #D4D4D4,
+        -2px 2px 0 #D4D4D4,
+        2px 2px 0 #D4D4D4;
 }
 
 .card-inner.is-flipped {
@@ -557,43 +776,181 @@
     cursor: pointer;
 }
 
-.previous-page {
-    background-color: transparent;
-    position: absolute;
-    left: 0;
-    top: 0;
+/* Фиксированы к краю viewport — не уезжают за экран и не занимают место во flow */
+.previous-page,
+.next-page {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2800;
+    line-height: 0;
 }
 
-.btn__link {
-    width: 20px;
-    height: 98vh;
-    background-color: transparent;
+.previous-page {
+    top: 688px;
+}
+
+.previous-page {
+    left: max(8px, env(safe-area-inset-left, 0px));
+}
+
+.next-page {
+    right: max(8px, env(safe-area-inset-right, 0px));
+}
+
+.previous-page .btn__link,
+.next-page .btn__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: clamp(88px, 48vh, 360px);
+    margin: 0;
+    padding: 0;
     border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+
+    background: linear-gradient(180deg, #4a9ee8 0%, #2a6ec4 42%, #1a4a8c 100%);
+    box-shadow:
+        0 0 0 2px #e8c440,
+        0 0 0 3px #6b4a12,
+        0 6px 16px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition:
+        filter 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.previous-page .btn__link {
+    border-radius: 0 16px 16px 0;
+    width: 20px;
+    height: 70px;
+}
+
+.next-page .btn__link {
+    border-radius: 16px 0 0 16px;
+}
+
+.previous-page .btn__link:hover,
+.next-page .btn__link:hover {
+    filter: brightness(1.08);
+    box-shadow:
+        0 0 0 2px #f5d655,
+        0 0 0 3px #6b4a12,
+        0 8px 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.previous-page .btn__link:active,
+.next-page .btn__link:active {
+    filter: brightness(0.95);
+    transform: scale(0.98);
+}
+
+.previous-page .btn__link:focus-visible,
+.next-page .btn__link:focus-visible {
+    outline: 3px solid rgba(255, 220, 120, 0.95);
+    outline-offset: 3px;
+}
+
+.previous-page .btn__link::after,
+.next-page .btn__link::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-left: 3px solid rgba(255, 255, 255, 0.95);
+    border-bottom: 3px solid rgba(255, 255, 255, 0.95);
+    flex-shrink: 0;
+}
+
+.previous-page .btn__link::after {
+    transform: rotate(45deg);
+    margin-left: 3px;
+}
+
+.next-page .btn__link::after {
+    transform: rotate(-135deg);
+    margin-right: 3px;
 }
 
 .clear-decks-btn {
-    width: 99px;
-    height: 35px;
-    border-radius: 19px;
-    border: #000 solid 1px;
-    opacity: 0;
+    min-width: 120px;
+    height: 40px;
+    padding: 0 18px;
+    margin: 0;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    pointer-events: auto;
+
+    font-family: Supercell, sans-serif;
+    font-size: 11px;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+
+    background: linear-gradient(180deg, #4a9ee8 0%, #2a6ec4 42%, #1a4a8c 100%);
+    box-shadow:
+        0 0 0 2px #e8c440,
+        0 0 0 3px #6b4a12,
+        0 5px 14px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition:
+        filter 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.clear-decks-btn:hover {
+    filter: brightness(1.08);
+    box-shadow:
+        0 0 0 2px #f5d655,
+        0 0 0 3px #6b4a12,
+        0 7px 18px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.clear-decks-btn:active {
+    filter: brightness(0.95);
+    transform: scale(0.98);
+}
+
+.clear-decks-btn:focus-visible {
+    outline: 3px solid rgba(255, 220, 120, 0.95);
+    outline-offset: 3px;
 }
 
 .undo-secret-card-btn {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 106px;
     height: 35px;
     border-radius: 19px;
     border: #000 solid 1px;
     opacity: 0;
+    pointer-events: none;
 }
 
 .buttons {
     display: flex;
-    width: 100vw;
-    justify-content: space-between;
-    position: absolute;
-    top: 25px;
-    padding: 0 25px;
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    position: fixed;
+    top: max(20px, env(safe-area-inset-top, 0px));
+    left: 0;
+    right: 0;
+    padding: 0 max(25px, env(safe-area-inset-right, 0px)) 0 max(25px, env(safe-area-inset-left, 0px));
+    box-sizing: border-box;
+    z-index: 2850;
+    pointer-events: none;
 }
 
 .start-page {

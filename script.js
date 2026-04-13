@@ -6,7 +6,65 @@ const undoSecretCardBtn = document.querySelector('.undo-secret-card-btn');
 
 let lastMovedCardInfo = null;
 
+// --- РАБОТА С ПАМЯТЬЮ (localStorage) ---
+
+function getTeamsData() {
+    return JSON.parse(localStorage.getItem('teamsData')) || { characters: [], secretCards: [] };
+}
+
+function saveSecretCardToStorage(cardId, imageSrc, team) {
+    const data = getTeamsData();
+    if (!data.secretCards) data.secretCards = [];
+
+    // Удаляем старую запись об этой карте, если она была
+    data.secretCards = data.secretCards.filter(c => c.id !== cardId);
+    data.secretCards.push({ id: cardId, image: imageSrc, team: team });
+
+    localStorage.setItem('teamsData', JSON.stringify(data));
+}
+
+function removeSecretCardFromStorage(cardId) {
+    const data = getTeamsData();
+    if (!data.secretCards) return;
+
+    data.secretCards = data.secretCards.filter(c => c.id !== cardId);
+    localStorage.setItem('teamsData', JSON.stringify(data));
+}
+
+function restoreSecretCards() {
+    const data = getTeamsData();
+    if (!data.secretCards || data.secretCards.length === 0) return;
+
+    data.secretCards.forEach(savedCard => {
+        const cardElement = document.querySelector(`.secret-card__item[data-secret-index="${savedCard.id}"]`);
+        const targetDeck = document.querySelector(`.deck[data-team="${savedCard.team}"]`);
+
+        if (cardElement && targetDeck) {
+            const targetSlot = getLastSlot(targetDeck);
+            if (targetSlot && !targetSlot.querySelector('.secret-card__item')) {
+                const innerCard = cardElement.querySelector('.card-inner');
+                if (innerCard) innerCard.classList.add('is-flipped');
+                
+                targetSlot.appendChild(cardElement);
+            }
+        }
+    });
+}
+
+// --- ЛОГИКА ВЕЕРА (10 КАРТ) ---
+
+function ensureSecretCardIndices() {
+    if (!secretCardList) return;
+    const allCards = secretCardList.querySelectorAll('.secret-card__item');
+    allCards.forEach((el, i) => {
+        if (el.dataset.secretIndex === undefined) {
+            el.dataset.secretIndex = String(i);
+        }
+    });
+}
+
 function getFanCards() {
+    if (!secretCardList) return [];
     return Array.from(secretCardList.querySelectorAll(':scope > .secret-card__item'));
 }
 
@@ -16,47 +74,23 @@ function resetFanCardStyles(card) {
     card.style.marginLeft = '';
     card.style.transform = '';
     card.style.zIndex = '';
+    card.style.transition = '';
 }
 
 function layoutSecretCards() {
     const fanCards = getFanCards();
     const count = fanCards.length;
 
-    // Когда все 8 карт на месте — оставляем исходную CSS-дугу
-    if (count === 8) {
+    // Если все 10 карт в веере - используем базовый CSS
+    if (count === 10) {
         fanCards.forEach(resetFanCardStyles);
         return;
     }
 
-    const maxOffsetMap = {
-        7: 380,
-        6: 310,
-        5: 245,
-        4: 180,
-        3: 120,
-        2: 60,
-        1: 0
-    };
-
-    const maxRotationMap = {
-        7: 13,
-        6: 11,
-        5: 9,
-        4: 7,
-        3: 5,
-        2: 3,
-        1: 0
-    };
-
-    const maxTopMap = {
-        7: 76,
-        6: 68,
-        5: 58,
-        4: 50,
-        3: 42,
-        2: 35,
-        1: 30
-    };
+    // Мапы для плавного сближения оставшихся карт (расстояние ~140px)
+    const maxOffsetMap = { 9: 560, 8: 490, 7: 420, 6: 350, 5: 280, 4: 210, 3: 140, 2: 70, 1: 0 };
+    const maxRotationMap = { 9: 20, 8: 17, 7: 14, 6: 11, 5: 8, 4: 6, 3: 4, 2: 2, 1: 0 };
+    const maxTopMap = { 9: 110, 8: 95, 7: 82, 6: 70, 5: 60, 4: 50, 3: 42, 2: 35, 1: 30 };
 
     const maxOffset = maxOffsetMap[count] ?? 180;
     const maxRotation = maxRotationMap[count] ?? 7;
@@ -71,10 +105,9 @@ function layoutSecretCards() {
 
         const offsetX = ratio * maxOffset;
         const rotation = ratio * maxRotation;
-        const top =
-            minTop +
-            Math.pow(Math.abs(ratio), 1.45) * (maxTop - minTop);
+        const top = minTop + Math.pow(Math.abs(ratio), 1.5) * (maxTop - minTop);
 
+        card.style.transition = 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
         card.style.left = '50%';
         card.style.marginLeft = '0';
         card.style.top = `${top}px`;
@@ -83,6 +116,8 @@ function layoutSecretCards() {
     });
 }
 
+// --- УПРАВЛЕНИЕ КОЛОДАМИ ---
+
 function getLastSlot(deck) {
     const allSlots = deck.querySelectorAll('.slot__frame');
     return allSlots[allSlots.length - 1] || null;
@@ -90,9 +125,7 @@ function getLastSlot(deck) {
 
 function isLastSlotOccupied(deck) {
     const lastSlot = getLastSlot(deck);
-    if (!lastSlot) return true;
-
-    return !!lastSlot.querySelector('.secret-card__item');
+    return lastSlot ? !!lastSlot.querySelector('.secret-card__item') : true;
 }
 
 function clearActiveDeck() {
@@ -114,76 +147,60 @@ function getSelectedDeck() {
     return document.querySelector('.deck.active-deck');
 }
 
+// --- АНИМАЦИИ И ПЕРЕМЕЩЕНИЕ ---
+
 function revealCardWithMagic(card) {
     const innerCard = card.querySelector('.card-inner');
-    if (!innerCard) return;
-
-    if (card.classList.contains('is-revealing') || innerCard.classList.contains('is-flipped')) return;
+    if (!innerCard || card.classList.contains('is-revealing') || innerCard.classList.contains('is-flipped')) return;
 
     card.classList.add('is-revealing');
-
     const onRevealEnd = () => {
         card.classList.remove('is-revealing');
         innerCard.classList.add('is-flipped');
         card.removeEventListener('animationend', onRevealEnd);
     };
-
     card.addEventListener('animationend', onRevealEnd);
 }
-
-decks.forEach(deck => {
-    deck.addEventListener('click', function (event) {
-        event.stopPropagation();
-
-        if (deck.classList.contains('deck-disabled')) return;
-
-        clearActiveDeck();
-        deck.classList.add('active-deck');
-    });
-});
 
 function FLIP_moveToSlot(movingCard) {
     const selectedDeck = getSelectedDeck();
     if (!selectedDeck) return;
 
     const targetSlot = getLastSlot(selectedDeck);
-    if (!targetSlot) return;
+    if (!targetSlot || targetSlot.querySelector('.secret-card__item')) return;
 
-    if (targetSlot.querySelector('.secret-card__item')) return;
     const firstRect = movingCard.getBoundingClientRect();
-
     movingCard.classList.remove('is-active');
 
+    // Сохраняем информацию для отмены
     lastMovedCardInfo = {
         card: movingCard,
         fromParent: secretCardList,
         nextSibling: movingCard.nextElementSibling
     };
 
+    // Сохраняем в localStorage
+    const cardId = movingCard.dataset.secretIndex;
+    const imageSrc = movingCard.querySelector('.open-card img').getAttribute('src');
+    const team = selectedDeck.dataset.team;
+    saveSecretCardToStorage(cardId, imageSrc, team);
 
     targetSlot.appendChild(movingCard);
-
     layoutSecretCards();
 
     const lastRect = movingCard.getBoundingClientRect();
-
     const deltaX = firstRect.left - lastRect.left;
     const deltaY = firstRect.top - lastRect.top;
-    const scaleX = firstRect.width / lastRect.width;
-    const scaleY = firstRect.height / lastRect.height;
 
     movingCard.style.transition = 'none';
     movingCard.style.transformOrigin = 'top left';
-    movingCard.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
-
-    movingCard.offsetHeight;
+    movingCard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    movingCard.offsetHeight; // trigger reflow
 
     movingCard.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
-    movingCard.style.transform = 'translate(0, 0) scale(1, 1)';
+    movingCard.style.transform = 'translate(0, 0)';
 
-    if (container) {
-        container.classList.remove('has-active-card');
-    }
+    if (container) container.classList.remove('has-active-card');
 
     movingCard.addEventListener('transitionend', function cleanup(e) {
         if (e.propertyName === 'transform') {
@@ -195,16 +212,16 @@ function FLIP_moveToSlot(movingCard) {
     });
 
     selectedDeck.classList.remove('active-deck');
-
     updateDeckStates();
 }
-
 
 function returnLastSecretCard() {
     if (!lastMovedCardInfo) return;
 
     const { card, fromParent, nextSibling } = lastMovedCardInfo;
-    const innerCard = card.querySelector('.card-inner');
+    
+    // Удаляем из localStorage
+    removeSecretCardFromStorage(card.dataset.secretIndex);
 
     if (nextSibling && nextSibling.parentNode === fromParent) {
         fromParent.insertBefore(card, nextSibling);
@@ -213,33 +230,32 @@ function returnLastSecretCard() {
     }
 
     card.classList.remove('is-active', 'is-revealing');
+    const innerCard = card.querySelector('.card-inner');
+    if (innerCard) innerCard.classList.remove('is-flipped');
 
-    if (innerCard) {
-        innerCard.classList.remove('is-flipped');
-    }
-
-    card.style.transition = '';
-    card.style.transform = '';
-    card.style.transformOrigin = '';
-
+    resetFanCardStyles(card);
     layoutSecretCards();
 
-    if (container) {
-        container.classList.remove('has-active-card');
-    }
-
-    clearActiveDeck();
-    updateDeckStates();
-
+    if (container) container.classList.remove('has-active-card');
     lastMovedCardInfo = null;
-    updateUndoButtonState();
+    updateDeckStates();
 }
+
+// --- ОБРАБОТЧИКИ СОБЫТИЙ ---
+
+decks.forEach(deck => {
+    deck.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (deck.classList.contains('deck-disabled')) return;
+        clearActiveDeck();
+        deck.classList.add('active-deck');
+    });
+});
 
 if (cards.length > 0) {
     cards.forEach(card => {
-        card.addEventListener('click', function (event) {
-            event.stopPropagation();
-
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (card.closest('.slot__frame')) return;
 
             const innerCard = card.querySelector('.card-inner');
@@ -247,54 +263,41 @@ if (cards.length > 0) {
             const isFlipped = innerCard.classList.contains('is-flipped');
 
             if (!isActive) {
-                cards.forEach(c => {
-                    if (!c.closest('.slot__frame')) {
-                        c.classList.remove('is-active');
-                    }
-                });
-
+                cards.forEach(c => !c.closest('.slot__frame') && c.classList.remove('is-active'));
                 card.classList.add('is-active');
                 if (container) container.classList.add('has-active-card');
-            }
-
-            else if (isActive && !isFlipped) {
+            } else if (!isFlipped) {
                 revealCardWithMagic(card);
-            }
-
-            else if (isActive && isFlipped) {
+            } else {
                 const selectedDeck = getSelectedDeck();
-
-                if (!selectedDeck) return;
-
-                if (isLastSlotOccupied(selectedDeck)) {
-                    updateDeckStates();
-                    return;
+                if (selectedDeck && !isLastSlotOccupied(selectedDeck)) {
+                    FLIP_moveToSlot(card);
                 }
-
-                FLIP_moveToSlot(card);
             }
         });
     });
-
-    document.addEventListener('click', function (event) {
-        if (!event.target.closest('.secret-card__item') && !event.target.closest('.deck')) {
-            cards.forEach(c => {
-                if (!c.closest('.slot__frame')) {
-                    c.classList.remove('is-active');
-                }
-            });
-
-            if (container) container.classList.remove('has-active-card');
-        }
-    });
 }
 
-if (undoSecretCardBtn) {
-    undoSecretCardBtn.addEventListener('click', returnLastSecretCard);
-}
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.secret-card__item') && !e.target.closest('.deck')) {
+        cards.forEach(c => !c.closest('.slot__frame') && c.classList.remove('is-active'));
+        if (container) container.classList.remove('has-active-card');
+    }
+});
 
+if (undoSecretCardBtn) undoSecretCardBtn.addEventListener('click', returnLastSecretCard);
+
+// Сброс всех данных (вызывается извне)
+window.resetThirdPageDecksAndSecretCards = function() {
+    localStorage.removeItem('teamsData');
+    location.reload(); // Простейший способ очистить всё состояние
+};
+
+// --- ИНИЦИАЛИЗАЦИЯ ---
+
+ensureSecretCardIndices();
+restoreSecretCards(); 
 layoutSecretCards();
+updateDeckStates();
 
 window.addEventListener('resize', layoutSecretCards);
-
-updateDeckStates();
