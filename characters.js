@@ -1,14 +1,16 @@
 const characterImages = document.querySelectorAll('.character__image');
 
-const TEAM_COLORS = {
-    'color-one': '#ffffff',
+const TEAM_GLOW_COLORS = {
+    'color-one': '#F6C627',
     'color-two': '#ED2C2C',
-    'color-three': '#F6C627',
+    'color-three': '#ffffff',
     'color-four': '#27A3E6',
-    'color-five': '#000000',
-    'color-six': '#22C01D',
-    'color-seven': '#FF00EE',
-    'color-eight': '#D77D00'
+    'color-five': '#AE00FF',
+    'color-six': '#0000FF',
+    'color-seven': '#22C01D',
+    'color-eight': '#FF00EE',
+    'color-nineth': '#D77D00',
+    'color-tenth': '#000000'
 };
 
 let activePopoverContainer = null;
@@ -30,6 +32,8 @@ function createPopoverContent(image) {
             <button class="popover__color color-six" type="button" aria-label="Шестая команда"></button>
             <button class="popover__color color-seven" type="button" aria-label="Седьмая команда"></button>
             <button class="popover__color color-eight" type="button" aria-label="Восьмая команда"></button>
+            <button class="popover__color color-nineth" type="button" aria-label="Девятая команда"></button>
+            <button class="popover__color color-tenth" type="button" aria-label="Десятая команда"></button>
         </div>
         <button class="popover__remove">Убрать</button>
     `;
@@ -41,11 +45,11 @@ function getStorageData() {
 
 function applyCharacterColor(image, team) {
     const characterItem = image.closest('.character__item');
-    const color = TEAM_COLORS[team];
+    const glow = TEAM_GLOW_COLORS[team];
 
-    if (!characterItem || !color) return;
+    if (!characterItem || !glow) return;
 
-    characterItem.style.setProperty('--team-color', color);
+    characterItem.style.setProperty('--team-glow', glow);
     characterItem.setAttribute('data-team-color', 'true');
 }
 
@@ -231,7 +235,7 @@ function openPopover(trigger) {
     popoverElement.querySelector('.popover__remove').addEventListener('click', () => {
         const characterItem = trigger.closest('.character__item');
 
-        characterItem.style.removeProperty('--team-color');
+        characterItem.style.removeProperty('--team-glow');
         characterItem.removeAttribute('data-team-color');
 
         removeCharacter(trigger.id);
@@ -248,6 +252,8 @@ function updateCharactersState() {
 }
 
 characterImages.forEach((image) => {
+    image.setAttribute('tabindex', '0');
+
     image.addEventListener('click', (event) => {
         event.stopPropagation();
 
