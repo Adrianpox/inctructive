@@ -80,39 +80,44 @@ function resetFanCardStyles(card) {
 function layoutSecretCards() {
     const fanCards = getFanCards();
     const count = fanCards.length;
+    if (count === 0) return;
 
-    // Если все 10 карт в веере - используем базовый CSS
-    if (count === 10) {
-        fanCards.forEach(resetFanCardStyles);
-        return;
-    }
-
-    // Мапы для плавного сближения оставшихся карт (расстояние ~140px)
-    const maxOffsetMap = { 9: 560, 8: 490, 7: 420, 6: 350, 5: 280, 4: 210, 3: 140, 2: 70, 1: 0 };
-    const maxRotationMap = { 9: 20, 8: 17, 7: 14, 6: 11, 5: 8, 4: 6, 3: 4, 2: 2, 1: 0 };
-    const maxTopMap = { 9: 110, 8: 95, 7: 82, 6: 70, 5: 60, 4: 50, 3: 42, 2: 35, 1: 30 };
-
-    const maxOffset = maxOffsetMap[count] ?? 180;
-    const maxRotation = maxRotationMap[count] ?? 7;
-    const minTop = 30;
-    const maxTop = maxTopMap[count] ?? 50;
+    // ГЕОМЕТРИЯ КРИВОЙ (настраиваемые параметры)
+    const spacing = 135;      // Расстояние между картами по горизонтали
+    const arcCurvature = 5;  // Насколько сильно карты опускаются к краям (изгиб)
+    const angleStep = 4.2;    // Угол наклона каждой карты
+    const baseTop = 35;       // Высота центральной (самой высокой) точки дуги
 
     fanCards.forEach((card, index) => {
+        // Пропускаем активную карту, которая сейчас "всплыла" для анимации
         if (card.classList.contains('is-active')) return;
 
-        const middle = (count - 1) / 2;
-        const ratio = middle === 0 ? 0 : (index - middle) / middle;
+        // 1. Находим позицию карты относительно центра веера
+        // Для 3 карт это будет: -1, 0, 1
+        // Для 10 карт это будет: -4.5, -3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5, 4.5
+        const relativeIndex = index - (count - 1) / 2;
 
-        const offsetX = ratio * maxOffset;
-        const rotation = ratio * maxRotation;
-        const top = minTop + Math.pow(Math.abs(ratio), 1.5) * (maxTop - minTop);
+        // 2. Вычисляем X (смещение влево/вправо)
+        const offsetX = relativeIndex * spacing;
 
-        card.style.transition = 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+        // 3. Вычисляем Y по формуле параболы (Красная кривая)
+        // Чем дальше от центра (больше relativeIndex), тем больше значение Top
+        // Math.pow(relativeIndex, 2) дает нам плавный симметричный изгиб
+        const top = baseTop + (Math.pow(Math.abs(relativeIndex), 2) * arcCurvature);
+
+        // 4. Вычисляем поворот (Rotation)
+        const rotation = relativeIndex * angleStep;
+
+        // Применяем стили
+        card.style.position = 'absolute';
         card.style.left = '50%';
         card.style.marginLeft = '0';
         card.style.top = `${top}px`;
         card.style.transform = `translateX(calc(-50% + ${offsetX}px)) rotate(${rotation}deg)`;
         card.style.zIndex = `${100 + index}`;
+        
+        // Плавная анимация при изменении состава веера
+        card.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
     });
 }
 
