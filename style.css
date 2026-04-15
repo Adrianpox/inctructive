@@ -498,75 +498,7 @@
     }
 }
 
-/* 1-я карта (крайняя левая) */
-.secret-card__list .secret-card__item:nth-child(1) {
-    margin-left: -540px;
-    top: 115px;
-    transform: translateX(-50%) rotate(-20deg);
-}
 
-/* 2-я карта */
-.secret-card__list .secret-card__item:nth-child(2) {
-    margin-left: -420px;
-    top: 85px;
-    transform: translateX(-50%) rotate(-15deg);
-}
-
-/* 3-я карта */
-.secret-card__list .secret-card__item:nth-child(3) {
-    margin-left: -300px;
-    top: 62px;
-    transform: translateX(-50%) rotate(-10deg);
-}
-
-/* 4-я карта */
-.secret-card__list .secret-card__item:nth-child(4) {
-    margin-left: -180px;
-    top: 45px;
-    transform: translateX(-50%) rotate(-6deg);
-}
-
-/* 5-я карта (центр-лево) */
-.secret-card__list .secret-card__item:nth-child(5) {
-    margin-left: -60px;
-    top: 35px;
-    transform: translateX(-50%) rotate(-2deg);
-}
-
-/* 6-я карта (центр-право) */
-.secret-card__list .secret-card__item:nth-child(6) {
-    margin-left: 60px;
-    top: 35px;
-    transform: translateX(-50%) rotate(2deg);
-}
-
-/* 7-я карта */
-.secret-card__list .secret-card__item:nth-child(7) {
-    margin-left: 180px;
-    top: 45px;
-    transform: translateX(-50%) rotate(6deg);
-}
-
-/* 8-я карта */
-.secret-card__list .secret-card__item:nth-child(8) {
-    margin-left: 300px;
-    top: 62px;
-    transform: translateX(-50%) rotate(10deg);
-}
-
-/* 9-я карта */
-.secret-card__list .secret-card__item:nth-child(9) {
-    margin-left: 420px;
-    top: 85px;
-    transform: translateX(-50%) rotate(15deg);
-}
-
-/* 10-я карта (крайняя правая) */
-.secret-card__list .secret-card__item:nth-child(10) {
-    margin-left: 540px;
-    top: 115px;
-    transform: translateX(-50%) rotate(20deg);
-}
 
 .deck__section {
     position: relative;
