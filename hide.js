@@ -16,7 +16,7 @@ coinValues.forEach(value => {
 
 function getSavedState() {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : { isHidden: true, scale: 1 };
+    return saved ? JSON.parse(saved) : { isHidden: false, scale: 1 };
 }
 
 function saveState(isHidden, scale) {
