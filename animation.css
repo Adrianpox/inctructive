@@ -9,16 +9,64 @@
 }
 
 /* =========================================
+   VIEWPORT (как страница с колодами): вписывание в окно, без прокрутки
+   ========================================= */
+html:has(.start-page__body) {
+    height: 100%;
+    overflow: hidden;
+}
+
+body.start-page__body {
+    margin: 0;
+    min-height: 100dvh;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.start-viewport-fit {
+    width: 100%;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+/* Эталон макета заставки 1920×1080 — масштаб под реальный viewport */
+.start-viewport-fit__inner {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    flex-shrink: 0;
+    transform-origin: top center;
+    --start-fit: min(1, 100vw / 1920px, 100dvh / 1080px, 100vh / 1080px);
+}
+
+@supports (zoom: 1) {
+    .start-viewport-fit__inner {
+        zoom: var(--start-fit);
+    }
+}
+
+@supports not (zoom: 1) {
+    .start-viewport-fit__inner {
+        transform: scale(var(--start-fit));
+    }
+}
+
+/* =========================================
    ЧЕРНЫЙ ЭКРАН И ОЖИДАНИЕ
    ========================================= */
 #startup-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     background-color: #000;
-    /* Абсолютно черный фон */
     z-index: 99999;
     font-family: Supercell, sans-serif;
     display: flex;
@@ -49,50 +97,6 @@
 
 /* Изначально скрываем фазы анимации */
 .supercell-phase,
-.loading-phase {
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* =========================================
-   СТАРТОВЫЙ ЭКРАН (ОЖИДАНИЕ НАЖАТИЯ)
-   ========================================= */
-
-#startup-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000; /* Исходный черный экран */
-    z-index: 99999; /* Поверх всего контента сайта */
-    font-family: Supercell, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease;
-}
-
-/* Мигающая подсказка "НАЖМИТЕ ПРОБЕЛ" */
-.blink-text {
-    color: #fff;
-    font-size: 24px;
-    letter-spacing: 2px;
-    animation: blink 1.5s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* Изначально скрываем обе фазы анимации */
-.supercell-phase, 
 .loading-phase {
     opacity: 0;
     visibility: hidden;

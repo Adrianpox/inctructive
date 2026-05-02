@@ -1,3 +1,11 @@
+function resetSessionDataFromTitleScreen() {
+    try {
+        localStorage.removeItem('teamsData');
+    } catch (e) {
+        /* private mode / недоступное хранилище */
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const startupScreen = document.getElementById('startup-screen');
     const loadingText = document.getElementById('loading-text');
@@ -66,6 +74,7 @@ warmupNextPages();
         if ((event.code === 'Space' || event.keyCode === 32) && !hasStarted) {
             event.preventDefault();
             hasStarted = true;
+            resetSessionDataFromTitleScreen();
             let openPageSoundEffect = new Audio('open-page-sound.mp3');
             openPageSoundEffect.play();
 

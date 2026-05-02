@@ -2,9 +2,9 @@ const characterImages = document.querySelectorAll('.character__image');
 
 const TEAM_GLOW_COLORS = {
     'color-one': '#F6C627',
-    'color-two': '#ED2C2C',
-    'color-three': '#ffffff',
-    'color-four': '#27A3E6',
+    'color-two': '#ffffff',
+    'color-three': '#8B4513',
+    'color-four': '#ED2C2C',
     'color-five': '#AE00FF',
     'color-six': '#0000FF',
     'color-seven': '#22C01D',

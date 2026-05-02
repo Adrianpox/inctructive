@@ -399,9 +399,9 @@ html:has(.page__body) {
 }
 
 .color-one    { background: #F6C627;}
-.color-two    { background: #ED2C2C; }
-.color-three  { background: #ffffff; border: #000 solid 3px; }
-.color-four   { background: #27A3E6; }
+.color-two    { background:  #ffffff; border: #000 solid 3px;}
+.color-three  { background: #8B4513; }
+.color-four   { background: #ED2C2C; }
 .color-five   { background: #AE00FF; }
 .color-six    { background: #0000FF; }
 .color-seven  { background: #22C01D; }
